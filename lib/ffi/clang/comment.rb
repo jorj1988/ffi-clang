@@ -259,7 +259,7 @@ module FFI
 			end
 		end
 
-		class VerbatimLine < Comment
+		class VerbatimLine < BlockCommandComment
 			def text
 				Lib.extract_string Lib.verbatim_line_comment_get_text(@comment)
 			end
