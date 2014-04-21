@@ -270,7 +270,7 @@ describe Type do
       }.type }
 
     it 'returns the number of template arguments' do
-      expect(array_type.num_elements).to be_kind_of(Integer)
+      expect(array_type.num_tempalate_arguments).to be_kind_of(Integer)
     end
   end
 
@@ -284,8 +284,7 @@ describe Type do
       }.type }
 
     it 'returns the template argument of the type' do
-      expect(array_type.array_element_type).to be_kind_of(Type)
-      expect(array_type.array_element_type.kind).to eq(:type_int)
+      expect(array_type.template_argument).to be_kind_of(Type)
     end
   end
 
