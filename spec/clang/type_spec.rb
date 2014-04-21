@@ -260,6 +260,35 @@ describe Type do
     end
   end
 
+  describe '#num_tempalate_arguments', from_3_5: true do
+    let(:array_type) { find_matching(cursor_cxx) { |child, parent|
+        child.kind == :cursor_function_template and child.spelling == 'int_array'
+      }.type }
+
+    let(:array_type) { find_matching(cursor_cxx) { |child, parent|
+        child.kind == :cursor_class_template and child.spelling == 'int_array'
+      }.type }
+
+    it 'returns the number of template arguments' do
+      expect(array_type.num_elements).to be_kind_of(Integer)
+    end
+  end
+
+  describe '#template_argument', from_3_5: true do
+    let(:array_type) { find_matching(cursor_cxx) { |child, parent|
+        child.kind == :cursor_function_template and child.spelling == 'int_array'
+      }.type }
+
+    let(:array_type) { find_matching(cursor_cxx) { |child, parent|
+        child.kind == :cursor_class_template and child.spelling == 'int_array'
+      }.type }
+
+    it 'returns the template argument of the type' do
+      expect(array_type.array_element_type).to be_kind_of(Type)
+      expect(array_type.array_element_type.kind).to eq(:type_int)
+    end
+  end
+
   describe '#calling_conv' do
     let(:function) { find_matching(cursor_cxx) { |child, parent|
         child.kind == :cursor_function and child.spelling == 'f_variadic'

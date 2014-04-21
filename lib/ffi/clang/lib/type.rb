@@ -149,6 +149,11 @@ module FFI
 			attach_function :get_fuction_type_calling_conv, :clang_getFunctionTypeCallingConv, [CXType.by_value], :calling_conv
 
 			attach_function :equal_types, :clang_equalTypes, [CXType.by_value, CXType.by_value], :uint
+
+			if FFI::Clang::Utils.satisfy_version?('3.5')
+				attach_function :get_num_template_arguments, :clang_Type_getNumTemplateArguments, [CXType.by_value], :int
+				attach_function :get_template_argument, :clang_Type_getTemplateArgumentAsType, [CXType.by_value, :uint], CXType.by_value
+			end
 		end
 	end
 end

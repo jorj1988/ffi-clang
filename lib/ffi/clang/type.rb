@@ -127,6 +127,14 @@ module FFI
 				Cursor.new Lib.get_type_declaration(@type), @translation_unit
 			end
 
+			def num_template_arguments
+				Lib.get_num_template_arguments(@type)
+			end
+
+			def template_argument(i)
+				Type.new Lib.get_template_argument(@type, i), @translation_unit
+			end
+
 			def ==(other)
 				Lib.equal_types(@type, other.type) != 0
 			end
