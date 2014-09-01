@@ -230,10 +230,6 @@ module FFI
 				Lib.get_language @cursor
 			end
 
-			def translation_unit
-				@translation_unit
-			end
-
 			def visit_children(&block)
 				adapter = Proc.new do |cxcursor, parent_cursor, unused|
 					block.call Cursor.new(cxcursor, @translation_unit), Cursor.new(parent_cursor, @translation_unit)
@@ -331,8 +327,6 @@ module FFI
 			def num_arguments
 				Lib.cursor_get_num_arguments(@cursor)
 			end
-
-			attr_reader :cursor
 
 			def ==(other)
 				Lib.are_equal(@cursor, other.cursor) != 0
